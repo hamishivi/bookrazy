@@ -1,0 +1,19 @@
+{
+  "name": "bookrazy",
+  "version": "1.0.0",
+  "description": "freecodecamp basejump",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hamishivi/bookrazy.git"
+  },
+  "author": "Hamish Ivison",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hamishivi/bookrazy/issues"
+  },
+  "homepage": "https://github.com/hamishivi/bookrazy#readme"
+}
