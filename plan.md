@@ -9,3 +9,7 @@ _web sockets throughout to notify if someone wants to trade_
 /logout
 _trading process is very important:_
 flow is post book -> someone asks for a trade (/trade) -> you accept the trade -> give each other emails + location?
+
+navbar:
+BOOKRAZY        all books | my books | profile
+                (trades)    add books   add country, etc 
