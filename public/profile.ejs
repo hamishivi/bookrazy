@@ -11,30 +11,33 @@
   </head>
   <body>
     <% include views/toolbar %>
-    <% if (user) { %>
-        <br>
-        <p class="text-xs-center">You can trade for any of the books below!</p>
-        <p class="text-xs-center">Go to your dashboard to add or remove books.</p>
+    
+    <!-- display user's profile (email, ability to reset password, ability to add details) -->
+    <h1>Profile</h1>
+    <br>
+    <h3>Email: <% user.email %></h3>
+    <br>
+    <% if user.fullname { %>
+      <h3>Name: <% user.fullname %></h3>
     <% } else { %>
-        <br>
-        <p class="text-xs-center">Sign in or sign up to be able to post your own books and swap for any below!</p>
+       <!-- add full name option -->
     <% } %>
-    <!-- This is where the books will go! -->
-    <div class="card-deck">
-      <div class="card">
-        <% for (var i = 0; i < books.length; i++) { %>
-          <div class="card-deck-wrapper">
-          <img class="card-img-top" src="<% books[i].src %>" alt="<% books[i].name %>">
-          <div class="card-block">
-            <h4 class="card-title"><% books[i].name %></h4>
-            <% if (user) { %>
-              <a href="#" class="btn btn-primary">Trade!</a>
-            <% } %>
-          </div>
-        </div>
-        <% } %>
-      </div>
-    </div>
+    <br>
+    <% if user.city { %>
+      <h3>City: <% user.city %></h3>
+    <% } else { %>
+       <!-- add city option -->
+    <% } %>
+    <br>
+    <% if user.state { %>
+      <h3>State: <% user.state %></h3>
+    <% } else { %>
+       <!-- add state option -->
+    <% } %>
+    <br>
+    <button type="button" class="btn btn-danger btn-lrg" href="/forgot">Reset Password</button>
+
+        
     <% include views/footer %>
 
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
