@@ -11,33 +11,53 @@
   </head>
   <body>
     <% include views/toolbar %>
-    
+    <div class="container">
     <!-- display user's profile (email, ability to reset password, ability to add details) -->
+    <br>
     <h1>Profile</h1>
     <br>
-    <h3>Email: <% user.email %></h3>
+    <h5>Email:</h5><h3> <%= user.email %></h3>
     <br>
-    <% if user.fullname { %>
-      <h3>Name: <% user.fullname %></h3>
+    <% if (user.fullName) { %>
+      <h5>Name:</h5><h3> <%= user.fullName %></h3>
     <% } else { %>
-       <!-- add full name option -->
+         <div class="form-group">
+          <label for="exampleInputEmail1">Full Name</label>
+          <input type="name" class="form-control" placeholder="Enter Full Name" id="fullnameInput">
+        </div>
+        <button id="fullname" class="btn btn-primary">Add Name</button>
     <% } %>
     <br>
-    <% if user.city { %>
-      <h3>City: <% user.city %></h3>
+    <% if (user.customData.city) { %>
+      <h5>City:</h5><h3> <%= user.customData.city %></h3>
     <% } else { %>
-       <!-- add city option -->
+      <form class="form-inline" onsubmit="return false;">
+       <div class="form-group">
+          <label for="exampleInputEmail1">City: </label>
+          <input type="text" class="form-control" placeholder="Enter City" id="cityInput">
+        </div>
+        <button id="city" class="btn btn-primary">Add City</button>
+      </form>
     <% } %>
     <br>
-    <% if user.state { %>
-      <h3>State: <% user.state %></h3>
+    <% if (user.customData.state) { %>
+      <h5>State:</h5><h3> <%= user.customData.state %></h3>
     <% } else { %>
-       <!-- add state option -->
+       <form class="form-inline" onsubmit="return false;">
+       <div class="form-group">
+          <label for="exampleInputEmail1">State: </label>
+          <input type="text" class="form-control" placeholder="Enter State" id="stateInput">
+        </div>
+        <button id="state" class="btn btn-primary">Add State</button>
+      </form>
     <% } %>
     <br>
-    <button type="button" class="btn btn-danger btn-lrg" href="/forgot">Reset Password</button>
-
-        
+    <a class="btn btn-danger btn-lrg" href="/forgot">Reset Password</a>
+    </div>
+    <br>
+    <div class="card-deck">
+      <div class="card"></div>
+    </div>
     <% include views/footer %>
 
     <!-- jQuery first, then Tether, then Bootstrap JS. -->

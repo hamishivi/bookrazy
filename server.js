@@ -29,7 +29,9 @@ app.use(session({
 }));
 
 app.use(stormpath.init(app, {
-  // Optional configuration options.
+   expand: {
+    customData: true,
+  }
 }));
 
 app.set('view engine', 'ejs')
