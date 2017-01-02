@@ -12,10 +12,11 @@
   </head>
   <body>
     <% include views/toolbar %>
-    
+    <div class="container">
+      <br>
     <!-- need to be able to add books, delete books, and check for trades! -->
-    <a type="button" href="/addBook" class="btn btn-primary btn-lrg">Add a Book</a>
-    
+    <a type="button" href="/addBook" class="btn btn-success btn-block">Add a Book!</a>
+    <br>
     <!-- A list of the current trades the user has pending (ie trades people have asked for and trades the user has initiated) -->
     <% if (user.trades) { %>
       <h3>People want to trade books!</h3>
@@ -48,7 +49,7 @@
     </div>
     <% } %>
     
-    <p>Below is a list of all the books you have up on the site. Hit the trashcan to delete a book.</p>
+    <p>Below is a list of all the books you have up on the site. Hit the trashcan to delete a book from the site.</p>
     <h3>Your Books:</h3>
     <div class="card-deck">
       <div class="card">
@@ -62,7 +63,7 @@
         <% } %>
       </div>
     </div>
-    
+    </div>
     <% include views/footer %>
     
     <!-- jQuery first, then Tether, then Bootstrap JS. -->

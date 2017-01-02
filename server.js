@@ -5,18 +5,20 @@ var express = require('express'),
     mongoose = require('mongoose'),
     User = require('./app/models/users.js'),
     session = require('client-sessions'),
-    stormpath = require('express-stormpath');
+    stormpath = require('express-stormpath'),
+    bodyParser = require('body-parser');
+
 
 var app = express();
 require('dotenv').load();
 
 
-//mongoose.connect(process.env.MONGO_URI);
+mongoose.connect(process.env.MONGO_URI);
 
 app.use('/controllers', express.static(process.cwd() + '/app/controllers'));
 app.use('/public', express.static(process.cwd() + '/public'));
 app.use('/common', express.static(process.cwd() + '/app/common'));
-
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(session({
   cookieName: 'session',
