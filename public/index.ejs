@@ -12,6 +12,7 @@
   </head>
   <body>
     <% include views/toolbar %>
+    <div class="container">
     <% if (user) { %>
         <br>
         <p class="text-xs-center">You can trade for any of the books below!</p>
@@ -21,21 +22,20 @@
         <p class="text-xs-center">Sign in or sign up to be able to post your own books and swap for any below!</p>
     <% } %>
     <!-- This is where the books will go! -->
-    <div class="card-deck">
         <% for (var i = 0; i < books.length; i++) { %>
-        <div class="card">
+        <div class="card card-inverse">
           <div class="card-deck-wrapper">
-          <img class="card-img-top" src="<%= books[i].image %>" alt="<%= books[i].name %>">
-          <div class="card-block">
+          <img class="card-img img-fluid" src="<%= books[i].image %>" alt="<%= books[i].name %>">
+          <div class="card-img-overlay">
             <h4 class="card-title"><%= books[i].name %></h4>
             <% if (user) { %>
-              <a href="#" class="btn btn-primary">Trade!</a>
+              <a href="/trade/<%= books[i].id %>" class="btn btn-primary">Trade!</a>
             <% } %>
           </div>
         </div>
         </div>
         <% } %>
-    </div>
+        </div>
     <% include views/footer %>
 
     <!-- jQuery first, then Tether, then Bootstrap JS. -->

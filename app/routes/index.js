@@ -61,8 +61,13 @@ module.exports = function (app) {
     
     app.get('/dashboard', stormpath.getUser, requireLogin, function(req, res) {
         res.locals.user = req.user;
-        res.locals.books = [];
-        res.render(path + '/public/dashboard.ejs');
+        Book.find({'creator': req.user.email}, function(err, data) {
+            if (err) return err;
+            res.locals.books = data;
+            console.log(data);
+            res.render(path + '/public/dashboard.ejs');
+        });
+        
     });
     
     app.get('/addBook', stormpath.getUser, requireLogin, function(req, res) {
@@ -82,6 +87,31 @@ module.exports = function (app) {
             res.redirect('/');
         });
     });
+    
+    app.get('/trade/:bookid/', stormpath.getUser, requireLogin, function(req, res) {
+        Book.findById(req.params.bookid, function(err, book) {
+            if (err) console.log(err);
+            // need to add book to pending trades of user who owns it
+            app.get('stormpathApplication').getAccounts( { username: 'blah' }, function(err, accounts) { 
+                if (err) return err;
+                accounts.each(function(account, cb) {
+                    
+                });
+            });
+        });
+    });
+    
+    app.get('/delete/:bookid', stormpath.getUser, requireLogin, function(req, res) {
+        
+    })
+
+    app.get('/delete/:bookid/', stormpath.getUser, requireLogin, function(req, res) {
+        Book.findOneAndRemove({"_id":req.params.bookid, "creator": req.user.email}, function(err, data) {
+            if (err) return err;
+            // again add success message? its pretty fast and clear what happens...
+            res.redirect('/dashboard');
+        })
+    });
 
     app.get('/logout', function(req, res) {
         req.session.reset();
@@ -89,3 +119,8 @@ module.exports = function (app) {
     });
 
 }
+
+String.prototype.toObjectId = function() {
+  var ObjectId = (require('mongoose').Types.ObjectId);
+  return new ObjectId(this.toString());
+};

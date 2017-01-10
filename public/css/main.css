@@ -1,4 +1,9 @@
-.card-img-top{
-  width:auto;
-  max-height:200px;
+.card {
+  width: 20%;
+  display: inline-block;
+  margin-left: 25px;
+}
+
+.btn-primary:visited, .btn-warning:visited, .btn-danger:visited,  .btn-success:visited, .btn-info:visited,  .btn-inverse:visited {
+    color: #FFFFFF;
 }
