@@ -9,7 +9,7 @@
     <!-- Bootstrap CSS -->
     <script src="https://use.fontawesome.com/336201c5b0.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
-    <link rel="stylesheet" href="/public/css/main.css">
+   <link rel="stylesheet" href="/public/css/main.css">
 </head>
   <body>
     <% include views/toolbar %>
@@ -37,20 +37,18 @@
     <% } %>
     <% if (user.customData.pendingTrades) { %>
       <h3>People want your books!</h3>
-      <div class="card-deck">
-        <div class="card">
             <% for (var i = 0; i < user.customData.pendingTrades.length; i++) { %>
+            <div class="card card-inverse">
               <div class="card-deck-wrapper">
-                <img class="card-img-top" src="<% user.customData.pendingTrades[i].image %>" alt="<% user.customData.pendingTrades[i].name %>">
-                <div class="card-block">
-                <h4 class="card-title"><% user.customData.pendingTrades[i].name %></h4>
-                <a href="/acceptTrade/<% user.customData.pendingTrades[i].id %>" class="btn btn-success">Check Trade Status</a>
+                <img class="card-img img-fluid" src="<%= user.customData.pendingTrades[i].image %>" alt="<%= user.customData.pendingTrades[i].name %>">
+                <div class="card-img-overlay">
+                <h4 class="card-title"><%= user.customData.pendingTrades[i].name %></h4>
+                <a href="/acceptTrade/<%= user.customData.pendingTrades[i]._id %>" class="btn btn-success">Accept Trade</a>
+              </div>
+              </div>
               </div>
             <% } %>
-        </div>
-    </div>
     <% } %>
-    
     <p>Below is a list of all the books you have up on the site. Hit the trashcan to delete a book from the site.</p>
     <h3>Your Books:</h3>
         <% for (var i = 0; i < books.length; i++) { %>

@@ -21,10 +21,14 @@ module.exports = function (app) {
     // needs users and books
     app.get('/', stormpath.getUser, function (req, res) {
         res.locals.user = req.user;
-        Book.find({}, function(err, data) {
+        var username = "";
+        if (req.user) {
+            username = req.user.username;
+        }
+        Book.find({creator: {$ne : username}}, function(err, data) {
             if (err) return err;
             res.locals.books = data;
-             res.render(path + '/public/index.ejs');
+            res.render(path + '/public/index.ejs');
         });
     });
     
@@ -91,17 +95,35 @@ module.exports = function (app) {
     app.get('/trade/:bookid/', stormpath.getUser, requireLogin, function(req, res) {
         Book.findById(req.params.bookid, function(err, book) {
             if (err) console.log(err);
+            if (book == null) { 
+                console.log("Book was null when trading. please check me!!");
+                res.redirect('/');
+                return;
+            }
             // need to add book to pending trades of user who owns it
-            app.get('stormpathApplication').getAccounts( { username: 'blah' }, function(err, accounts) { 
+            app.get('stormpathApplication').getAccounts( { username: book.creator }, function(err, accounts) { 
                 if (err) return err;
                 accounts.each(function(account, cb) {
-                    
+                    account.getCustomData(function(err, customData) {
+                        if (err) return err;
+                        if (!customData.pendingTrades) {
+                            customData.pendingTrades = [];
+                        }
+                        book.wanter = req.user.username;
+                        customData.pendingTrades.push(book);
+                        book.remove();
+                        customData.save(function(err){
+                            if (err) return err;
+                            // add some kind of success message?
+                            res.redirect("/");
+                        });
+                    })
                 });
             });
-        });
+        }) // so others cant trade for book
     });
     
-    app.get('/delete/:bookid', stormpath.getUser, requireLogin, function(req, res) {
+    app.get('/accept/:bookid', stormpath.getUser, requireLogin, function(req, res) {
         
     })
 

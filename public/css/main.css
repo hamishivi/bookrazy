@@ -1,7 +1,7 @@
 .card {
   width: 20%;
   display: inline-block;
-  margin-left: 25px;
+  margin-left: 40px;
 }
 
 .btn-primary:visited, .btn-warning:visited, .btn-danger:visited,  .btn-success:visited, .btn-info:visited,  .btn-inverse:visited {
