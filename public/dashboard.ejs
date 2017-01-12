@@ -19,23 +19,24 @@
     <a href="/addBook" class="btn btn-success btn-block">Add a Book!</a>
     <br>
     <!-- A list of the current trades the user has pending (ie tr) -->
-    <% if (user.customData.receiving) { %>
+    <% if (user.customData.receiving.length > 0) { %>
       <h3>Did you recieve these books yet?</h3>
       <div class="card-deck">
-        <div class="card">
             <% for (var i = 0; i < user.customData.receiving.length; i++) { %>
+            <div class="card card-inverse">
               <div class="card-deck-wrapper">
-                <img class="card-img-top" src="<%= user.customData.receiving[i].image %>" alt="<%= user.customData.receiving[i].name %>">
-                <div class="card-block">
+                <img class="card-img img-fluid" src="<%= user.customData.receiving[i].image %>" alt="<%= user.customData.receiving[i].name %>">
+                <div class="card-img-overlay">
                 <h4 class="card-title"><%= user.customData.receiving[i].name %></h4>
-                <a href="/received/<%= user.customData.receiving[i].id %>" class="btn btn-success">Yeah, I got it!</a>
-                <a href="/denied/<%= user.customData.receiving[i].id %>" class="btn btn-success">Nah, I don't think it'll arrive</a>
+                <a href="/received/<%= user.customData.receiving[i]._id %>" class="btn btn-success">Yeah, I got it!</a><br><br>
+                <a href="/denied/<%= user.customData.receiving[i]._id %>" class="btn btn-danger">Nah, I don't think it'll arrive</a>
+              </div>
+              </div>
               </div>
             <% } %>
         </div>
-    </div>
     <% } %>
-    <% if (user.customData.pendingTrades) { %>
+    <% if (user.customData.pendingTrades.length > 0) { %>
       <h3>People want your books!</h3>
             <% for (var i = 0; i < user.customData.pendingTrades.length; i++) { %>
             <div class="card card-inverse">
@@ -43,7 +44,7 @@
                 <img class="card-img img-fluid" src="<%= user.customData.pendingTrades[i].image %>" alt="<%= user.customData.pendingTrades[i].name %>">
                 <div class="card-img-overlay">
                 <h4 class="card-title"><%= user.customData.pendingTrades[i].name %></h4>
-                <a href="/acceptTrade/<%= user.customData.pendingTrades[i]._id %>" class="btn btn-success">Accept Trade</a>
+                <a href="/accept/<%= user.customData.pendingTrades[i]._id %>" class="btn btn-success">Accept Trade</a>
               </div>
               </div>
               </div>

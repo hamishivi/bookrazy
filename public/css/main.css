@@ -2,6 +2,7 @@
   width: 20%;
   display: inline-block;
   margin-left: 40px;
+  min-height: 100px;
 }
 
 .btn-primary:visited, .btn-warning:visited, .btn-danger:visited,  .btn-success:visited, .btn-info:visited,  .btn-inverse:visited {
