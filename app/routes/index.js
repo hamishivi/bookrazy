@@ -39,7 +39,7 @@ module.exports = function (app) {
     
      app.get('/profile', stormpath.getUser, requireLogin, function (req, res) {
         res.locals.user = req.user;
-        console.log(req.user);
+        //console.log(req.user);
         res.render(path + '/public/profile.ejs');
     });
     
@@ -55,7 +55,7 @@ module.exports = function (app) {
         req.user.customData.city = req.params.city;
         req.user.customData.save(function(err) {
             if (err) return err;
-            console.log(req.user)
+            //console.log(req.user)
             res.redirect('/profile');
         });
     });
@@ -84,7 +84,7 @@ module.exports = function (app) {
     });
     
     app.post('/api/addbook', stormpath.getUser, requireLogin, function(req, res) {
-        console.log(req.body);
+        //console.log(req.body);
         var newBook = new Book();
         newBook.name = req.body.book;
         newBook.image = req.body.image;
@@ -114,7 +114,7 @@ module.exports = function (app) {
                             customData.pendingTrades = [];
                         }
                         book.wanter = req.user.username;
-                        console.log(book)
+                        //console.log(book)
                         customData.pendingTrades.push(book);
                         book.remove();
                         customData.save(function(err){
@@ -122,24 +122,39 @@ module.exports = function (app) {
                             // add some kind of success message?
                             res.redirect("/");
                         });
-                    })
+                    });
                 });
             });
         });
     });
     
+    app.get('/stopTrade/:bookid', stormpath.getUser, requireLogin, function(req, res) {
+        var trades = req.user.customData.pendingTrades;
+        for (var i = 0; i < trades.length; i++) {
+            if (trades[i]._id == req.params.bookid) {
+                var newBook = new Book();
+                newBook.name = trades[i].name;
+                newBook.image = trades[i].image;
+                newBook.creator = trades[i].creator;
+                newBook.save(function(err) {
+                    if (err) return err;
+                });
+                req.user.customData.pendingTrades.splice(i, 1);
+                req.user.customData.save();
+                res.redirect('/dashboard');
+            }
+        }
+    });
+    
     app.get('/accept/:bookid', stormpath.getUser, requireLogin, function(req, res) {
         var trades = req.user.customData.pendingTrades;
-        console.log(trades);
         for (var i = 0; i < trades.length; i++) {
             var book = trades[i];
             if (book._id == req.params.bookid) {
                 res.locals.email = book.wanter;
                 res.locals.id = book._id;
-                console.log(res.locals.email);
                 app.get('stormpathApplication').getAccounts( { username: book.wanter }, function(err, accounts) { 
                     if (err) return err;
-                    console.log(accounts);
                     accounts.each(function(account, cb) {
                         account.getCustomData(function(err, customData) {
                             if (err) return err;
@@ -152,13 +167,39 @@ module.exports = function (app) {
                             customData.save(function(err){
                                 if (err) return err;
                                 // accept and send email
-                                res.render(path + "/public/accept.ejs")
+                                res.render(path + "/public/accept.ejs");
                             });
                         });
                     });
                 });
             }
         }
+    });
+    
+    app.get('/cancelTrade/:bookid/:email', stormpath.getUser, requireLogin, function(req, res) {
+        app.get('stormpathApplication').getAccounts( { username: req.params.email }, function(err, accounts) { 
+            if (err) return err;
+            accounts.each(function(account, cb) {
+                account.getCustomData(function(err, customData) {
+                    if (err) return err;
+                    var rec = customData.receiving;
+                    for (var i = 0; i < rec.length; i++) {
+                        if (rec[i]._id == req.params.bookid) {
+                            var newBook = new Book();
+                            newBook.creator = req.user.username;
+                            newBook.image = rec[i].image;
+                            newBook.name = rec[i].name;
+                            newBook.save(function(err) {
+                                if (err) return err;
+                            });
+                            customData.receiving.splice(i, 1);
+                            customData.save();
+                        }
+                        res.redirect('/dashboard');
+                    }
+                });
+            });
+        });
     });
     
     // book gets swapped to new owner

@@ -44,7 +44,8 @@
                 <img class="card-img img-fluid" src="<%= user.customData.pendingTrades[i].image %>" alt="<%= user.customData.pendingTrades[i].name %>">
                 <div class="card-img-overlay">
                 <h4 class="card-title"><%= user.customData.pendingTrades[i].name %></h4>
-                <a href="/accept/<%= user.customData.pendingTrades[i]._id %>" class="btn btn-success">Accept Trade</a>
+                <a href="/accept/<%= user.customData.pendingTrades[i]._id %>" class="btn btn-success">Accept Trade</a><br><br>
+                <a href="/stopTrade/<%= user.customData.pendingTrades[i]._id %>" class="btn btn-danger">Cancel Trade</a>
               </div>
               </div>
               </div>
