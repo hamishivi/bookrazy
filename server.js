@@ -33,6 +33,9 @@ app.use(session({
     ephemeral: true
 }));
 
+// Note: this requires the OKTA_ORG, OKTA_APPLICATION_ID and OKTA_APITOKEN
+// environment variables to be set to work.
+// see https://github.com/stormpath/express-stormpath/blob/4.0.0/docs/changelog.rst
 app.use(stormpath.init(app, {
     expand: {
         customData: true,
