@@ -21,7 +21,7 @@
             <a href="/addBook" class="btn btn-success btn-block">Add a Book!</a>
             <br>
             <!-- A list of the current trades the user has pending (ie tr) -->
-            <% if (user.customData.receiving.length > 0) { %>
+            <% if (user.customData.receiving && user.customData.receiving.length > 0) { %>
                 <h3>Did you recieve these books yet?</h3>
                 <div class="card-deck">
                     <% for (var i = 0; i < user.customData.receiving.length; i++) { %>
@@ -38,7 +38,7 @@
                         <% } %>
                 </div>
                 <% } %>
-                    <% if (user.customData.pendingTrades.length > 0) { %>
+                    <% if (user.customData.pendingTrades && user.customData.pendingTrades.length > 0) { %>
                         <h3>People want your books!</h3>
                         <% for (var i = 0; i < user.customData.pendingTrades.length; i++) { %>
                             <div class="card card-inverse">
