@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <!-- Required meta tags always come first -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -9,67 +10,69 @@
     <!-- Bootstrap CSS -->
     <script src="https://use.fontawesome.com/336201c5b0.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
-   <link rel="stylesheet" href="/public/css/main.css">
+    <link rel="stylesheet" href="/public/css/main.css">
 </head>
-  <body>
+
+<body>
     <% include views/toolbar %>
-    <div class="container">
-    <br>
-    <!-- need to be able to add books, delete books, and check for trades! -->
-    <a href="/addBook" class="btn btn-success btn-block">Add a Book!</a>
-    <br>
-    <!-- A list of the current trades the user has pending (ie tr) -->
-    <% if (user.customData.receiving.length > 0) { %>
-      <h3>Did you recieve these books yet?</h3>
-      <div class="card-deck">
-            <% for (var i = 0; i < user.customData.receiving.length; i++) { %>
-            <div class="card card-inverse">
-              <div class="card-deck-wrapper">
-                <img class="card-img img-fluid" src="<%= user.customData.receiving[i].image %>" alt="<%= user.customData.receiving[i].name %>">
-                <div class="card-img-overlay">
-                <h4 class="card-title"><%= user.customData.receiving[i].name %></h4>
-                <a href="/received/<%= user.customData.receiving[i]._id %>" class="btn btn-success">Yeah, I got it!</a><br><br>
-                <a href="/denied/<%= user.customData.receiving[i]._id %>" class="btn btn-danger">Nah, I don't think it'll arrive</a>
-              </div>
-              </div>
-              </div>
-            <% } %>
-        </div>
-    <% } %>
-    <% if (user.customData.pendingTrades.length > 0) { %>
-      <h3>People want your books!</h3>
-            <% for (var i = 0; i < user.customData.pendingTrades.length; i++) { %>
-            <div class="card card-inverse">
-              <div class="card-deck-wrapper">
-                <img class="card-img img-fluid" src="<%= user.customData.pendingTrades[i].image %>" alt="<%= user.customData.pendingTrades[i].name %>">
-                <div class="card-img-overlay">
-                <h4 class="card-title"><%= user.customData.pendingTrades[i].name %></h4>
-                <a href="/accept/<%= user.customData.pendingTrades[i]._id %>" class="btn btn-success">Accept Trade</a><br><br>
-                <a href="/stopTrade/<%= user.customData.pendingTrades[i]._id %>" class="btn btn-danger">Cancel Trade</a>
-              </div>
-              </div>
-              </div>
-            <% } %>
-    <% } %>
-    <p>Below is a list of all the books you have up on the site. Hit the trashcan to delete a book from the site.</p>
-    <h3>Your Books:</h3>
-        <% for (var i = 0; i < books.length; i++) { %>
-        <div class="card card-inverse">
-          <div class="card-deck-wrapper">
-            <img class="card-img img-fluid" src="<%= books[i].image %>" alt="<%= books[i].name %>">
-            <div class="card-img-overlay">
-              <h4 class="card-title"><%= books[i].name %></h4>
-              <a href="/delete/<%= books[i].id %>" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i>Delete</a>
-            </div>
-          </div>
-        </div>
-        <% } %>
-      
-    <% include views/footer %>
-    
-    <!-- jQuery first, then Tether, then Bootstrap JS. -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js" integrity="sha384-XTs3FgkjiBgo8qjEjBk0tGmf3wPrWtA6coPfQDfFEY8AnYJwjalXCiosYRBIBZX8" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
-  </body>
+        <div class="container">
+            <br>
+            <!-- need to be able to add books, delete books, and check for trades! -->
+            <a href="/addBook" class="btn btn-success btn-block">Add a Book!</a>
+            <br>
+            <!-- A list of the current trades the user has pending (ie tr) -->
+            <% if (user.customData.receiving.length > 0) { %>
+                <h3>Did you recieve these books yet?</h3>
+                <div class="card-deck">
+                    <% for (var i = 0; i < user.customData.receiving.length; i++) { %>
+                        <div class="card card-inverse">
+                            <div class="card-deck-wrapper">
+                                <img class="card-img img-fluid" src="<%= user.customData.receiving[i].image %>" alt="<%= user.customData.receiving[i].name %>">
+                                <div class="card-img-overlay">
+                                    <h4 class="card-title"><%= user.customData.receiving[i].name %></h4>
+                                    <a href="/received/<%= user.customData.receiving[i]._id %>" class="btn btn-success">Yeah, I got it!</a><br><br>
+                                    <a href="/denied/<%= user.customData.receiving[i]._id %>" class="btn btn-danger">Nah, I don't think it'll arrive</a>
+                                </div>
+                            </div>
+                        </div>
+                        <% } %>
+                </div>
+                <% } %>
+                    <% if (user.customData.pendingTrades.length > 0) { %>
+                        <h3>People want your books!</h3>
+                        <% for (var i = 0; i < user.customData.pendingTrades.length; i++) { %>
+                            <div class="card card-inverse">
+                                <div class="card-deck-wrapper">
+                                    <img class="card-img img-fluid" src="<%= user.customData.pendingTrades[i].image %>" alt="<%= user.customData.pendingTrades[i].name %>">
+                                    <div class="card-img-overlay">
+                                        <h4 class="card-title"><%= user.customData.pendingTrades[i].name %></h4>
+                                        <a href="/accept/<%= user.customData.pendingTrades[i]._id %>" class="btn btn-success">Accept Trade</a><br><br>
+                                        <a href="/stopTrade/<%= user.customData.pendingTrades[i]._id %>" class="btn btn-danger">Cancel Trade</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <% } %>
+                                <% } %>
+                                    <p>Below is a list of all the books you have up on the site. Hit the trashcan to delete a book from the site.</p>
+                                    <h3>Your Books:</h3>
+                                    <% for (var i = 0; i < books.length; i++) { %>
+                                        <div class="card card-inverse">
+                                            <div class="card-deck-wrapper">
+                                                <img class="card-img img-fluid" src="<%= books[i].image %>" alt="<%= books[i].name %>">
+                                                <div class="card-img-overlay">
+                                                    <h4 class="card-title"><%= books[i].name %></h4>
+                                                    <a href="/delete/<%= books[i].id %>" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i>Delete</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <% } %>
+
+                                            <% include views/footer %>
+
+                                                <!-- jQuery first, then Tether, then Bootstrap JS. -->
+                                                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+                                                <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js" integrity="sha384-XTs3FgkjiBgo8qjEjBk0tGmf3wPrWtA6coPfQDfFEY8AnYJwjalXCiosYRBIBZX8" crossorigin="anonymous"></script>
+                                                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
+</body>
+
 </html>

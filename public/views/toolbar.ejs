@@ -1,31 +1,31 @@
 <nav class="navbar navbar-dark bg-primary">
-  <a class="navbar-brand" href="#">Bookrazy</a>
-  <ul class="nav navbar-nav">
-    <% if (user) { %>
-    <li class="nav-item">
-      <a class="nav-link" href="/">All Books</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="/dashboard">Dashboard</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="/profile">Profile</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="/login" id="logout">Logout</a>
-    </li>
-        <li class="nav-item">
-      <a class="nav-link" href="/help" id="help">Help</a>
-    </li>
-    <% } else { %>
-    <li class="nav-item">
-      <a class="nav-link" href="/login">Sign In</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="/">All Books</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="/help" id="help">Help</a>
-    </li>
-    <% } %>
+    <a class="navbar-brand" href="#">Bookrazy</a>
+    <ul class="nav navbar-nav">
+        <% if (user) { %>
+            <li class="nav-item">
+                <a class="nav-link" href="/">All Books</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/dashboard">Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/profile">Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/login" id="logout">Logout</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/help" id="help">Help</a>
+            </li>
+            <% } else { %>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Sign In</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/">All Books</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/help" id="help">Help</a>
+                </li>
+                <% } %>
 </nav>
