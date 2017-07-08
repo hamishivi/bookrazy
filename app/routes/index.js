@@ -14,7 +14,7 @@ module.exports = function (app) {
         } else {
             res.redirect('/login');
         }
-    };
+    }
     
     app.set('view engine', 'ejs');
     
@@ -35,7 +35,7 @@ module.exports = function (app) {
     app.get('/help', stormpath.getUser, function(req, res) {
         res.locals.user = req.user;
         res.render(path + '/public/help.ejs');
-    })
+    });
     
      app.get('/profile', stormpath.getUser, requireLogin, function (req, res) {
         res.locals.user = req.user;
@@ -245,7 +245,7 @@ module.exports = function (app) {
             if (err) return err;
             // again add success message? its pretty fast and clear what happens...
             res.redirect('/dashboard');
-        })
+        });
     });
 
     app.get('/logout', function(req, res) {
@@ -253,7 +253,7 @@ module.exports = function (app) {
         res.redirect('/');
     });
 
-}
+};
 
 String.prototype.toObjectId = function() {
   var ObjectId = (require('mongoose').Types.ObjectId);

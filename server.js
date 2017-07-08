@@ -3,7 +3,6 @@
 var express = require('express'),
     routes = require('./app/routes/index.js'),
     mongoose = require('mongoose'),
-    User = require('./app/models/users.js'),
     session = require('client-sessions'),
     stormpath = require('express-stormpath'),
     bodyParser = require('body-parser');
@@ -13,7 +12,7 @@ var app = express();
 require('dotenv').load();
 
 
-mongoose.connect(process.env.MONGO_URI);
+mongoose.connect(process.env.MONGO_URI, { useMongoClient: true });
 
 app.use('/controllers', express.static(process.cwd() + '/app/controllers'));
 app.use('/public', express.static(process.cwd() + '/public'));
@@ -43,7 +42,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.set('view engine', 'ejs')
+app.set('view engine', 'ejs');
 
 app.on('stormpath.ready', function () {
   console.log('Stormpath Ready!');
